@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+
+{% block content%}
+<div class="col-md-8">
+    <div class="row">
+      <div class=" card card-body">
+        
+        <p><h1>{{ department | title }}</h1></p>
+            <hr>
+               {% for project in object_list %}
+           <h2><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h2>
+                      <p>{{ project.contents | slice:":200" }}...</p>
+        <small>
+            Department:&nbsp;
+            {% for department in project.departments.all %}
+            <a href="{% url 'nce:projectdetail' department.name %}">
+                {{ department.name }}
+            </a>&nbsp;
+            {% endfor %}
+        </small>
+
+            <p>{{ project.contents | slice:":400" }}...</p>
+
+            {% endfor %}
+
+
+      </div>
+
+
+          
+</div>
+</div>
+{%endblock%}

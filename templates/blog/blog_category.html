@@ -1,0 +1,52 @@
+{%extends 'blog/blogbase.html'%}
+
+
+{%block blog-content%}
+<div class="container">
+<div class="row">
+      <div class="col-md-8">
+        <div class="card card-body">
+            <p><h1>{{ category | title }}</h1></p>
+            <hr>
+                {% for post in posts %}
+                <h2><a href="{% url 'blog_detail' post.pk%}">{{ post.title }}</a></h2>
+        <small>
+            {{ post.created_on.date }} |&nbsp;
+            Categories:&nbsp;
+            {% for category in post.categories.all %}
+            <a href="{% url 'blog_category' category.name %}">
+                {{ category.name }}
+            </a>&nbsp;
+            {% endfor %}
+        </small>
+
+            <p>{{ post.body | slice:":400" }}...</p>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+<!--=====START OF THE SECOND CARD FOR SIDEBAR===-->
+        <div class=" col-md-4">
+          <div class="card card-body">
+            <div class="sidebar">
+              <h3 class="sidebar-title">Treading</h3>
+              <hr>
+                  
+
+              </div><!-- End sidebar categories-->
+
+            </div>
+
+          </div>
+      </div>
+
+
+
+
+</div>
+</div>
+{%endblock%}
